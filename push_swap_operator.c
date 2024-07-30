@@ -75,12 +75,8 @@ void	reverse_rotate_stacks(stack **a, stack **b, int size)
 
 	while (size--)
 	{
-		if ((*a)->size < 2)
-			return ;
 		n = stack_pop_back(a, &idx);
 		stack_push_front(a, n, idx);
-		if ((*b)->size < 2)
-			return ;
 		n = stack_pop_back(b, &idx);
 		stack_push_front(b, n, idx);
 		write(1, "rrr\n", 4);
