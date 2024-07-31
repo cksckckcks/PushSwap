@@ -64,7 +64,7 @@ void	start_push_swap(t_stack **a, t_stack **b, int **arr, int size)
 {
 	quick_sort(arr, 0, size - 1);
 	node_index_setting(a, (*arr), size);
-	push_swap(a, b, 0, size);
+	push_swap3(a, b, 0, size);
 	free((*arr));
 	free_stacks(a, b);
 }

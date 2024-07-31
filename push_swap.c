@@ -20,12 +20,16 @@ void	three_val_sort(t_stack **stc, int size)
 		swap_stack(stc);
 	if (size == 3)
 	{
-		rotate_stack(stc);
-		if ((*stc)->head->val > (*stc)->head->chil->val)
-			swap_stack(stc);
-		reverse_rotate_stack(stc);
-		if ((*stc)->head->val > (*stc)->head->chil->val)
-			swap_stack(stc);
+		if ((*stc)->head->val > (*stc)->head->chil->chil->val || \
+		(*stc)->head->chil->val > (*stc)->head->chil->chil->val)
+		{
+			rotate_stack(stc);
+			if ((*stc)->head->val > (*stc)->head->chil->val)
+				swap_stack(stc);
+			reverse_rotate_stack(stc);
+			if ((*stc)->head->val > (*stc)->head->chil->val)
+				swap_stack(stc);
+		}
 	}
 }
 
@@ -65,4 +69,19 @@ void	push_swap2(t_stack **a, t_stack **b, int left, int right)
 	push_swap(b, a, pivot1, pivot2);
 	stack_front_move(b, a, pivot1 - left);
 	push_swap(b, a, left, pivot1);
+}
+
+void	push_swap3(t_stack **a, t_stack **b, int left, int right)
+{
+	int	size;
+	int	pivot1;
+	int	pivot2;
+
+	size = right - left;
+	pivot1 = right - size / 3 * 2;
+	pivot2 = right - size / 3;
+	divide_three_bucket3(a, b, left, right);
+	push_swap(a, b, pivot2, right);
+	push_swap2(b, a, pivot1, pivot2);
+	push_swap2(b, a, left, pivot1);
 }

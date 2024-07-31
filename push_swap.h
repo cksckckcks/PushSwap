@@ -62,5 +62,6 @@ int		check_input_sort(int *input, int size);
 int		*array_allocate(int size);
 int		*put_input(t_stack **stc, char **input, int size, int sign);
 t_stack	*new_stack(char c);
-
+void	push_swap3(t_stack **a, t_stack **b, int left, int right);
+void	divide_three_bucket3(t_stack **a, t_stack **b, int left, int right);
 #endif
