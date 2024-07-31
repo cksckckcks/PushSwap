@@ -13,6 +13,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# include "./libft/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 
@@ -47,11 +48,17 @@ void	push_stack(stack **stc1, stack **stc2);
 void	rotate_stack(stack **stc);
 void	reverse_rotate_stack(stack **stc);
 void	reverse_rotate_stacks(stack **a, stack **b, int size);
+void	divide_three_bucket2(stack **a, stack **b, int left, int right);
+void	push_swap2(stack **a, stack **b, int left, int right);
+void	free_input(char	**input);
+void	input_dup_check(int *arr, int idx, int n);
 int		stack_pop_front(stack **stc, int *save);
 int		stack_pop_back(stack **stc, int *save);
 int		check_digit(char *str);
-int		ft_atoi(char *str);
+int		char_to_integer(char *str);
+int		check_input_sort(int *input, int size);
 int		*array_allocate(int size);
+int		*put_input(stack **stc, char **input, int size, int sign);
 stack	*new_stack(char c);
 
 #endif

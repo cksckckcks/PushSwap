@@ -53,7 +53,7 @@ void	divide_three_bucket(stack **a, stack **b, int left, int right)
 			rotate_stack(a);
 	}
 }
-#include <stdio.h>
+
 void	divide_three_bucket2(stack **a, stack **b, int left, int right)
 {
 	int	size;
@@ -79,23 +79,6 @@ void	divide_three_bucket2(stack **a, stack **b, int left, int right)
 	}
 }
 
-void	push_swap2(stack **a, stack **b, int left, int right)
-{
-	int	size;
-	int	pivot1;
-	int	pivot2;
-
-	size = right - left;
-	pivot1 = left + size / 3;
-	pivot2 = left + size / 3 * 2;
-	divide_three_bucket2(a, b, left, right);
-	push_swap(b, a, pivot2, right);
-	reverse_rotate_stacks(a, b, pivot1 - left);
-	push_swap(b, a, pivot1, pivot2);
-	stack_front_move(b, a, pivot1 - left);
-	push_swap(b, a, left, pivot1);
-}
-
 void	push_swap(stack **a, stack **b, int left, int right)
 {
 	int	size;
@@ -117,32 +100,19 @@ void	push_swap(stack **a, stack **b, int left, int right)
 	push_swap2(b, a, left, pivot1);
 }
 
-int	main(int argc, char **argv)
+void	push_swap2(stack **a, stack **b, int left, int right)
 {
-	int		i;
-	int		*tmp_arr;
-	stack	*a;
-	stack	*b;
+	int	size;
+	int	pivot1;
+	int	pivot2;
 
-	if (argc < 2)
-		print_error();
-	a = new_stack('a');
-	b = new_stack('b');
-	tmp_arr = array_allocate(argc - 1);
-	i = 0;
-	while (++i < argc)
-	{
-		if (check_digit(argv[i]))
-		{
-			stack_push_back(&a, ft_atoi(argv[i]), -1);
-			tmp_arr[i - 1] = ft_atoi(argv[i]);
-		}
-		else
-			print_error();
-	}
-	quick_sort(&tmp_arr, 0, argc - 2);
-	node_index_setting(&a, tmp_arr, argc - 1);
-	push_swap(&a, &b, 0, argc - 1);
-	free(tmp_arr);
-	exit(0);
+	size = right - left;
+	pivot1 = left + size / 3;
+	pivot2 = left + size / 3 * 2;
+	divide_three_bucket2(a, b, left, right);
+	push_swap(b, a, pivot2, right);
+	reverse_rotate_stacks(a, b, pivot1 - left);
+	push_swap(b, a, pivot1, pivot2);
+	stack_front_move(b, a, pivot1 - left);
+	push_swap(b, a, left, pivot1);
 }
