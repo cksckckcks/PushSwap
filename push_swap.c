@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	three_val_sort(stack **stc, int size)
+void	three_val_sort(t_stack **stc, int size)
 {
 	if (size < 2)
 		return ;
@@ -29,57 +29,7 @@ void	three_val_sort(stack **stc, int size)
 	}
 }
 
-void	divide_three_bucket(stack **a, stack **b, int left, int right)
-{
-	int	size;
-	int	pivot1;
-	int	pivot2;
-	int	i;
-
-	size = right - left;
-	pivot1 = right - size / 3 * 2;
-	pivot2 = right - size / 3;
-	i = 0;
-	while (size-- && (*a)->head)
-	{
-		if ((*a)->head->idx < pivot1)
-			push_stack(b, a);
-		else if ((*a)->head->idx >= pivot1 && (*a)->head->idx < pivot2)
-		{
-			push_stack(b, a);
-			rotate_stack(b);
-		}
-		else
-			rotate_stack(a);
-	}
-}
-
-void	divide_three_bucket2(stack **a, stack **b, int left, int right)
-{
-	int	size;
-	int	pivot1;
-	int	pivot2;
-	int	i;
-
-	size = right - left;
-	pivot1 = left + size / 3;
-	pivot2 = left + size / 3 * 2;
-	i = 0;
-	while (size-- && (*a)->head)
-	{
-		if ((*a)->head->idx < pivot1)
-			rotate_stack(a);
-		else if ((*a)->head->idx >= pivot1 && (*a)->head->idx < pivot2)
-		{
-			push_stack(b, a);
-			rotate_stack(b);
-		}
-		else
-			push_stack(b, a);
-	}
-}
-
-void	push_swap(stack **a, stack **b, int left, int right)
+void	push_swap(t_stack **a, t_stack **b, int left, int right)
 {
 	int	size;
 	int	pivot1;
@@ -100,7 +50,7 @@ void	push_swap(stack **a, stack **b, int left, int right)
 	push_swap2(b, a, left, pivot1);
 }
 
-void	push_swap2(stack **a, stack **b, int left, int right)
+void	push_swap2(t_stack **a, t_stack **b, int left, int right)
 {
 	int	size;
 	int	pivot1;

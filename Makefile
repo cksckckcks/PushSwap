@@ -5,7 +5,8 @@ SRCS =		push_swap.c \
 			push_swap_stack.c \
 			push_swap_utils.c \
 			push_swap_main.c \
-			push_swap_error_control.c
+			push_swap_error_control.c \
+			push_swap_bucket.c
 
 HEADER = push_swap.h
 

@@ -17,7 +17,7 @@ int	check_digit(char *str)
 	int	i;
 
 	i = 0;
-	if (str[0] == '-' && str[1] == '0')
+	if ((str[0] == '-' && str[1] == '0') || (str[0] == '0' && str[1]))
 		return (0);
 	if (str[i] == '-')
 		i++;
@@ -39,7 +39,7 @@ int	check_integer(long long n)
 	return (1);
 }
 
-int char_to_integer(char *str)
+int	char_to_integer(char *str)
 {
 	long long	ret;
 	int			sign;

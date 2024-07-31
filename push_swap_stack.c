@@ -12,11 +12,11 @@
 
 #include "push_swap.h"
 
-void	stack_push_front(stack **stc, int n, int idx)
+void	stack_push_front(t_stack **stc, int n, int idx)
 {
-	node	*new;
+	t_node	*new;
 
-	new = (node *)malloc(sizeof(node));
+	new = (t_node *)malloc(sizeof(t_node));
 	if (!new)
 		print_error();
 	new->val = n;
@@ -31,11 +31,11 @@ void	stack_push_front(stack **stc, int n, int idx)
 	((*stc)->size)++;
 }
 
-void	stack_push_back(stack **stc, int n, int idx)
+void	stack_push_back(t_stack **stc, int n, int idx)
 {
-	node	*new;
+	t_node	*new;
 
-	new = (node *)malloc(sizeof(node));
+	new = (t_node *)malloc(sizeof(t_node));
 	if (!new)
 		exit(1);
 	if ((*stc)->tail == NULL)
@@ -56,9 +56,9 @@ void	stack_push_back(stack **stc, int n, int idx)
 	(*stc)->tail = new;
 }
 
-int	stack_pop_front(stack **stc, int *save)
+int	stack_pop_front(t_stack **stc, int *save)
 {
-	node	*tmp;
+	t_node	*tmp;
 	int		ret;
 
 	tmp = (*stc)->head;
@@ -74,9 +74,9 @@ int	stack_pop_front(stack **stc, int *save)
 	return (ret);
 }
 
-int	stack_pop_back(stack **stc, int *save)
+int	stack_pop_back(t_stack **stc, int *save)
 {
-	node	*tmp;
+	t_node	*tmp;
 	int		ret;
 
 	tmp = (*stc)->tail;
@@ -97,9 +97,9 @@ int	stack_pop_back(stack **stc, int *save)
 	return (ret);
 }
 
-void	stack_front_move(stack **a, stack **b, int size)
+void	stack_front_move(t_stack **a, t_stack **b, int size)
 {
-	node	*tmp;
+	t_node	*tmp;
 
 	tmp = (*b)->head;
 	while (tmp && size--)

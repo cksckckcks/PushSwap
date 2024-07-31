@@ -12,11 +12,13 @@
 
 #include "push_swap.h"
 
-stack	*new_stack(char c)
+t_stack	*new_stack(char c)
 {
-	stack	*ret;
+	t_stack	*ret;
 
-	ret = (stack *)malloc(sizeof(stack));
+	ret = (t_stack *)malloc(sizeof(t_stack));
+	if (!ret)
+		print_error();
 	ret->head = NULL;
 	ret->tail = NULL;
 	ret->size = 0;

@@ -16,4 +16,33 @@ void	print_error(void)
 	write(1, "error\n", 6);
 	exit(1);
 }
-// error시 free 어떻게 할 지 고민해봅시당~
+
+void	free_stack(t_stack **stc)
+{
+	t_node	*tmp;
+	t_node	*tmp2;
+
+	if ((*stc) == NULL)
+		return ;
+	tmp = (*stc)->head;
+	while (tmp)
+	{
+		tmp2 = tmp;
+		tmp = tmp->chil;
+		free(tmp2);
+	}
+	free(*stc);
+	(*stc) = NULL;
+}
+
+void	free_and_error(t_stack **a, t_stack **b)
+{
+	free_stacks(a, b);
+	print_error();
+}
+
+void	free_stacks(t_stack **a, t_stack **b)
+{
+	free_stack(a);
+	free_stack(b);
+}

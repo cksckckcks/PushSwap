@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	*put_input(stack **stc, char **input, int size, int sign)
+int	*put_input(t_stack **stc, char **input, int size, int sign)
 {
 	int	i;
 	int	*arr;
@@ -23,13 +23,16 @@ int	*put_input(stack **stc, char **input, int size, int sign)
 	{
 		if (check_digit(input[i]))
 		{
-			stack_push_back(stc, char_to_integer(input[i]), -1);	
+			stack_push_back(stc, char_to_integer(input[i]), -1);
 			arr[i - sign] = char_to_integer(input[i]);
 			input_dup_check(arr, i - sign, arr[i - sign]);
 			i++;
 		}
 		else
-			print_error();
+		{
+			free(arr);
+			return (NULL);
+		}
 	}
 	return (arr);
 }
@@ -57,18 +60,28 @@ void	free_input(char	**input)
 	free(input);
 }
 
+void	start_push_swap(t_stack **a, t_stack **b, int **arr, int size)
+{
+	quick_sort(arr, 0, size - 1);
+	node_index_setting(a, (*arr), size);
+	push_swap(a, b, 0, size);
+	free((*arr));
+	free_stacks(a, b);
+}
+
 int	main(int argc, char **argv)
 {
 	int		tmp_size;
 	int		*tmp_arr;
 	char	**tmp_input;
-	stack	*a;
-	stack	*b;
+	t_stack	*a;
+	t_stack	*b;
 
 	if (argc < 2)
 		print_error();
 	a = new_stack('a');
 	b = new_stack('b');
+	tmp_size = argc - 1;
 	if (argc == 2)
 	{
 		tmp_input = ft_split(argv[1], ' ');
@@ -77,15 +90,10 @@ int	main(int argc, char **argv)
 		free_input(tmp_input);
 	}
 	else
-	{
 		tmp_arr = put_input(&a, argv, argc, 1);
-		tmp_size = argc - 1;
-	}
+	if (tmp_arr == NULL)
+		free_and_error(&a, &b);
 	if (check_input_sort(tmp_arr, tmp_size))
 		exit(0);
-	quick_sort(&tmp_arr, 0, tmp_size - 1);
-	node_index_setting(&a, tmp_arr, tmp_size);
-	push_swap(&a, &b, 0, tmp_size);
-	free(tmp_arr);
-	exit(0);
+	start_push_swap(&a, &b, &tmp_arr, tmp_size);
 }

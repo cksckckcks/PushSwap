@@ -47,9 +47,9 @@ void	quick_sort(int **arr, int left, int right)
 	quick_sort(arr, j + 1, right);
 }
 
-void	node_index_setting(stack **stc, int *arr, int size)
+void	node_index_setting(t_stack **stc, int *arr, int size)
 {
-	node	*tmp;
+	t_node	*tmp;
 	int		i;
 
 	tmp = (*stc)->head;
