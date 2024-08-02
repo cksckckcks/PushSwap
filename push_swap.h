@@ -61,7 +61,12 @@ int		char_to_integer(char *str);
 int		check_input_sort(int *input, int size);
 int		*array_allocate(int size);
 int		*put_input(t_stack **stc, char **input, int size, int sign);
-t_stack	*new_stack(char c);
+int		check_min_idx(t_stack **stc);
 void	push_swap3(t_stack **a, t_stack **b, int left, int right);
 void	divide_three_bucket3(t_stack **a, t_stack **b, int left, int right);
+void	three_input_sort(t_stack **stc);
+void	row_input_sort(t_stack **a, t_stack **b, int input_size);
+void	five_input_sort(t_stack **a, t_stack **b);
+void	min_value_push(t_stack **a, t_stack **b, int sign);
+t_stack	*new_stack(char c);
 #endif

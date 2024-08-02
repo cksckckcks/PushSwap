@@ -6,7 +6,8 @@ SRCS =		push_swap.c \
 			push_swap_utils.c \
 			push_swap_main.c \
 			push_swap_error_control.c \
-			push_swap_bucket.c
+			push_swap_bucket.c \
+			push_swap_row_input.c
 
 HEADER = push_swap.h
 
@@ -35,6 +36,8 @@ clean:
 fclean: clean
 	rm -f $(TARGET)
 
-re: fclean all
+re: 
+	make fclean
+	make all
 
 .PHONY: all clean fclean re

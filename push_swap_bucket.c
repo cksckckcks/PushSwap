@@ -12,7 +12,6 @@
 
 #include "push_swap.h"
 
-
 void	divide_three_bucket(t_stack **a, t_stack **b, int left, int right)
 {
 	int	size;

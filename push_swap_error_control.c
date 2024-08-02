@@ -45,4 +45,5 @@ void	free_stacks(t_stack **a, t_stack **b)
 {
 	free_stack(a);
 	free_stack(b);
+	exit(0);
 }

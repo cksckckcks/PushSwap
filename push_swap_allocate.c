@@ -31,7 +31,5 @@ int	*array_allocate(int size)
 	int	*ret;
 
 	ret = (int *)malloc(sizeof(int) * size);
-	if (!ret)
-		print_error();
 	return (ret);
 }

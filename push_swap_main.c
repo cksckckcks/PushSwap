@@ -18,6 +18,8 @@ int	*put_input(t_stack **stc, char **input, int size, int sign)
 	int	*arr;
 
 	arr = array_allocate(size);
+	if (!arr)
+		return (NULL);
 	i = 0 + sign;
 	while (i < size)
 	{
@@ -91,9 +93,10 @@ int	main(int argc, char **argv)
 	}
 	else
 		tmp_arr = put_input(&a, argv, argc, 1);
+	row_input_sort(&a, &b, tmp_size);
 	if (tmp_arr == NULL)
 		free_and_error(&a, &b);
 	if (check_input_sort(tmp_arr, tmp_size))
-		exit(0);
+		free_stacks(&a, &b);
 	start_push_swap(&a, &b, &tmp_arr, tmp_size);
 }
