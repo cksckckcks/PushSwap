@@ -18,7 +18,7 @@ t_stack	*new_stack(char c)
 
 	ret = (t_stack *)malloc(sizeof(t_stack));
 	if (!ret)
-		print_error();
+		return (NULL);
 	ret->head = NULL;
 	ret->tail = NULL;
 	ret->size = 0;
@@ -32,4 +32,17 @@ int	*array_allocate(int size)
 
 	ret = (int *)malloc(sizeof(int) * size);
 	return (ret);
+}
+
+void	stack_allocate(t_stack **a, t_stack **b, char c1, char c2)
+{
+	(*a) = new_stack(c1);
+	if (!(*a))
+		print_error();
+	(*b) = new_stack(c2);
+	if (!(*b))
+	{
+		free(*a);
+		print_error();
+	}
 }

@@ -37,7 +37,8 @@ void	free_stack(t_stack **stc)
 
 void	free_and_error(t_stack **a, t_stack **b)
 {
-	free_stacks(a, b);
+	free_stack(a);
+	free_stack(b);
 	print_error();
 }
 
@@ -45,5 +46,5 @@ void	free_stacks(t_stack **a, t_stack **b)
 {
 	free_stack(a);
 	free_stack(b);
-	exit(0);
+	exit(1);
 }

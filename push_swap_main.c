@@ -12,9 +12,16 @@
 
 #include "push_swap.h"
 
+void	*free_arr(int **arr)
+{
+	free(*arr);
+	return (NULL);
+}
+
 int	*put_input(t_stack **stc, char **input, int size, int sign)
 {
 	int	i;
+	int	n;
 	int	*arr;
 
 	arr = array_allocate(size);
@@ -25,16 +32,16 @@ int	*put_input(t_stack **stc, char **input, int size, int sign)
 	{
 		if (check_digit(input[i]))
 		{
-			stack_push_back(stc, char_to_integer(input[i]), -1);
-			arr[i - sign] = char_to_integer(input[i]);
-			input_dup_check(arr, i - sign, arr[i - sign]);
+			if (!(char_to_integer(input[i], &n)))
+				return (free_arr(&arr));
+			stack_push_back(stc, n, -1);
+			arr[i - sign] = n;
+			if (!(input_dup_check(arr, i - sign, arr[i - sign])))
+				return (free_arr(&arr));
 			i++;
 		}
 		else
-		{
-			free(arr);
-			return (NULL);
-		}
+			return (free_arr(&arr));
 	}
 	return (arr);
 }
@@ -62,15 +69,6 @@ void	free_input(char	**input)
 	free(input);
 }
 
-void	start_push_swap(t_stack **a, t_stack **b, int **arr, int size)
-{
-	quick_sort(arr, 0, size - 1);
-	node_index_setting(a, (*arr), size);
-	push_swap3(a, b, 0, size);
-	free((*arr));
-	free_stacks(a, b);
-}
-
 int	main(int argc, char **argv)
 {
 	int		tmp_size;
@@ -81,8 +79,7 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		print_error();
-	a = new_stack('a');
-	b = new_stack('b');
+	stack_allocate(&a, &b, 'a', 'b');
 	tmp_size = argc - 1;
 	if (argc == 2)
 	{
@@ -93,9 +90,9 @@ int	main(int argc, char **argv)
 	}
 	else
 		tmp_arr = put_input(&a, argv, argc, 1);
-	row_input_sort(&a, &b, tmp_size);
 	if (tmp_arr == NULL)
 		free_and_error(&a, &b);
+	row_input_sort(&a, &b, tmp_size);
 	if (check_input_sort(tmp_arr, tmp_size))
 		free_stacks(&a, &b);
 	start_push_swap(&a, &b, &tmp_arr, tmp_size);

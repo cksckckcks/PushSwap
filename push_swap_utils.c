@@ -28,7 +28,7 @@ int	check_digit(char *str)
 		i++;
 	}
 	if (i == 1 && str[0] == '-')
-		print_error();
+		return (0);
 	return (1);
 }
 
@@ -39,7 +39,7 @@ int	check_integer(long long n)
 	return (1);
 }
 
-int	char_to_integer(char *str)
+int	char_to_integer(char *str, int *n)
 {
 	long long	ret;
 	int			sign;
@@ -57,13 +57,14 @@ int	char_to_integer(char *str)
 	{
 		ret = ret * 10 + str[i] - '0';
 		if (!check_integer(ret * sign))
-			print_error();
+			return (0);
 		i++;
 	}
-	return (ret * sign);
+	*n = sign * ret;
+	return (1);
 }
 
-void	input_dup_check(int *arr, int idx, int n)
+int	input_dup_check(int *arr, int idx, int n)
 {
 	int	i;
 
@@ -71,9 +72,10 @@ void	input_dup_check(int *arr, int idx, int n)
 	while (i < idx)
 	{
 		if (arr[i] == n)
-			print_error();
+			return (0);
 		i++;
 	}
+	return (1);
 }
 
 int	check_input_sort(int *input, int size)

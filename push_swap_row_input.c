@@ -96,8 +96,13 @@ void	three_input_sort(t_stack **stc)
 void	row_input_sort(t_stack **a, t_stack **b, int input_size)
 {
 	if (input_size == 3)
+	{
 		three_input_sort(a);
+		free_stacks(a, b);
+	}
 	else if (input_size == 5)
+	{
 		five_input_sort(a, b);
-	free_stacks(a, b);
+		free_stacks(a, b);
+	}
 }
